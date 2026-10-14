@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Ball
   - Ground
+  - obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - obstacle
   - Water
   - UI
   - 
