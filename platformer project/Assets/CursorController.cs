@@ -18,22 +18,16 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 pos = Mouse.current.position.ReadValue();
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         
-
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-
-        Vector2 relativeFromCenter = pos - screenCenter;
-
-        Debug.Log($"Mouse at {relativeFromCenter}");
-
         playerX = playerPosition.xPos;
         playerY = playerPosition.yPos;
 
         Vector2 scale = transform.localScale;
         
+        //Debug.Log($"Mouse at {mouseWorld} Player at {playerX}, {playerY}");
 
-        if(relativeFromCenter.x/5 > playerX)
+        if(mouseWorld.x > playerX)
         {
             if(isLeft)
             {
