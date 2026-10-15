@@ -25,18 +25,38 @@ public class topdowncontroller : MonoBehaviour
 
     bool isLeft;
 
+    bool isMovingRight;
+
     public int coinsCollected = 0;
+
+    [SerializeField] Animator animator;
+    [SerializeField] SpriteRenderer sprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetBool("isJumping", !isGround);
+        animator.SetBool("isRunning", !Mathf.Approximately(moveX, 0f));
+
+        if(isMovingRight && moveX < 0)
+        {
+            isMovingRight = false;
+            sprite.flipX = true;
+        }
+        else if(!isMovingRight && moveX >0)
+        {
+            isMovingRight = true;
+            sprite.flipX = false;
+        }
+
     }
 
     void FixedUpdate()
@@ -95,4 +115,6 @@ public class topdowncontroller : MonoBehaviour
             fireVelocityX += jet;
         }
     }
+
+
 }
